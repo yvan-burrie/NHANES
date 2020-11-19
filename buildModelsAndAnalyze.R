@@ -5,7 +5,7 @@
 #     Sriram Sankaranaraynan
 
 # set working directory, NEED TO CHANGE THIS TO RUN ON YOUR MACHINE
-setwd('~/Documents/Code/NHANES')
+setwd('.')
 
 # other file includes
 source('modelAnalyzeAndConvert.r')
@@ -18,9 +18,9 @@ mealData <- as.matrix(read.table('Matlab_Data/mealsFilteredWeighted.csv', sep = 
 print('Completed loading data.')
 
 # seperate male and female data, then remove unified data set
-mealData_M <- mealData[which(mealData[,3] == 1),]
+mealData_M <- mealData[which(mealData[, 3] == 1),]
 lenMealData_M <- nrow(mealData_M)
-mealData_F <- mealData[which(mealData[,3] != 1),]
+mealData_F <- mealData[which(mealData[, 3] != 1),]
 lenMealData_F <- nrow(mealData_F)
 if ((lenMealData_M + lenMealData_F) != nrow(mealData))
 {
@@ -82,8 +82,6 @@ linearModelSave(b_Protein_F, 'b_Protein_F')
 linearModelSave(b_Fat_F, 'b_Fat_F')
 linearModelSave(b_Fiber_F, 'b_Fiber_F')
 
-
-
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUILD LUNCH MODELS
 print('Building and ANALYZING lunch models...')
 # male
@@ -133,8 +131,6 @@ linearModelSave(l_Carbs_F, 'l_Carbs_F')
 linearModelSave(l_Protein_F, 'l_Protein_F')
 linearModelSave(l_Fat_F, 'l_Fat_F')
 linearModelSave(l_Fiber_F, 'l_Fiber_F')
-
-
 
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! BUILD DINNER MODELS
 print('Building and ANALYZING dinner models...')
