@@ -1,4 +1,4 @@
-NHanes Analysis Tools
+# NHanes Analysis Tools
 
 by William Mortl
 http://www.williammortl.com
@@ -9,47 +9,41 @@ NHANES: http://www.cdc.gov/nchs/nhanes.htm
 Written in Matlab / R
 There is no warranty implied with this code, and it is not to be used for commercial purposes without proper recompence. Feel free to use this code for educational purposes, any other use requires citations to: the NHANES study, William Michael Mortl, Sriram Sankaranaraynan, and Fraser Cameron
 
+ > This document outlines how to use this code, and what files are generated.
 
-
-Notes:
-------
-
-This document outlines how to use this code, and what files are generated.
-
--------------------------------------------------------------
-| Create Meal Prediction Models and Simulate - Instructions |
--------------------------------------------------------------
+## Create Meal Prediction Models and Simulate
 
 These instructions are for if you want to create the predictive models for NHanes, and then perform meal simulations. After cloning all files do the following to use the meal prediction models:
 
-IN R:
+Open 'buildModels.R' and adjust line 8 of the R code which sets the working directory to point to the directory where you cloned the repository into.
 
-1.)Open 'buildModels.R'.
-2.)Adjust line 8 of the R code which sets the working directory to point to the directory where you cloned the repository into.
+Run `buildDataAndModels.m`, this will take about 5-10 minutes and will create directories `Matlab_Data` and `Models`.
 
-IN MATLAB:
+The `Matlab_Data` directory will contain the following consolidated data files:
 
-3.)Run 'buildDataAndModels', this will take about 5-10 minutes and will create directories 'Matlab_Data' and 'Models'.
+ - `mealsFiltered.mat`
+ - `mealsFiltered.csv` - consolidated data containing only days that contained 3 square meals.
+ - `mealsFilteredWeighted.mat`
+ - `mealsFilteredWeighted.csv` - weighted adjusted consolidated data containing only days that contained 3 square meals.
+ - `consData.mat`: consolidated meal data from NHanes.
 
-	'Matlab_Data' will contain the following consolidated data files:
+The `Models` directory will contain all the CSV files for the predictive models.
 
-		mealsFiltered.mat			|
-		mealsFiltered.csv			--> consolidated data containing only days that contained 3 square meals
-		mealsFilteredWeighted.mat	|
-		mealsFilteredWeighted.csv	--> weighted adjusted consolidated data containing only days that contained 3 square meals
-		consData.mat				consolidated meal data from NHanes
+Run a single simulation! The column mappings are located below the instructions.
 
-	'Models' will contain all the CSV files for the predictive models
+Usage: `simulateDay({'M' | 'F'}, {age}, {body mass index})`
 
-4.)Run a single simulation! The column mappings are located below the instructions.
+```matlab
+output = simulateDay('M', 37, 32.5);
+```
 
-	Usage: simulateDay({'M' | 'F'}, {age}, {body mass index})
-	output = simulateDay('M', 37, 32.5)
+Or you can perform multiple simulations in the following manner:
 
-5.) ...Or you can perform multiple simulations in the following manner:
+Usage: `runMultipleSimulations({number of days to simulate})`
 
-	Usage: runMultipleSimulations({number of days to simulate})
-	sims = runMultipleSimulations(1000);
+```matlab
+sims = runMultipleSimulations(1000);
+```
 
 NOTE: In order to use the meal simulator as part of another project, you need the following files and directories (including their contents):
 
