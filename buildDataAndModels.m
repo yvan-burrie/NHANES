@@ -6,8 +6,13 @@
 %% first consolidate data
 consolidate;
 
-%% build R models, use the 'unset DYLD_LIBRARY_PATH...' black magic
-%%  to make 'Rscript' work!
 fprintf('\nGenerating models in R...\n');
-system('unset DYLD_LIBRARY_PATH; Rscript buildModels.R');
+
+%% build R models, use the 'unset DYLD_LIBRARY_PATH...' black magic to make 'Rscript' work!
+if isunix
+    system('unset DYLD_LIBRARY_PATH');
+end
+
+system('Rscript buildModels.R');
+
 fprintf('Completed generating R models.\n');
